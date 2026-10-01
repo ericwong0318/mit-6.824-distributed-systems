@@ -21,3 +21,44 @@ type ExampleReply struct {
 
 // Add your RPC definitions here.
 
+// Task Type
+type TaskType int
+
+const (
+	TaskTypeMap TaskType = iota
+	TaskTypeReduce
+	TaskTypeWait
+	TaskTypeFinish
+)
+
+// Task Status
+type TaskStatus int
+
+const (
+	TaskStatusPending TaskStatus = iota
+	TaskStatusRunning
+	TaskStatusFinished
+	TaskStatusFailed
+)
+
+// KeyValue is the type emitted by Map functions.
+type TaskRequest struct {
+}
+
+type TaskResponse struct {
+	TaskId            int
+	TaskType          TaskType
+	TaskInputFileName string
+
+	// For immediate files % calculation
+	MapperNumber  int
+	ReducerNumber int
+}
+
+type TaskReport struct {
+	TaskId     int
+	TaskStatus TaskStatus
+}
+
+type TaskReportAck struct {
+}

@@ -1,0 +1,38 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build All (Plugins + Binaries)",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "command": "rm -f mrapps/*.so main/mrworker main/mrcoordinator main/mrsequential && go build -race -buildmode=plugin -o mrapps/wc.so mrapps/wc.go && go build -race -buildmode=plugin -o mrapps/indexer.so mrapps/indexer.go && go build -race -buildmode=plugin -o mrapps/mtiming.so mrapps/mtiming.go && go build -race -buildmode=plugin -o mrapps/rtiming.so mrapps/rtiming.go && go build -race -buildmode=plugin -o mrapps/jobcount.so mrapps/jobcount.go && go build -race -buildmode=plugin -o mrapps/early_exit.so mrapps/early_exit.go && go build -race -buildmode=plugin -o mrapps/crash.so mrapps/crash.go && go build -race -buildmode=plugin -o mrapps/nocrash.so mrapps/nocrash.go && go build -race -o main/mrworker main/mrworker.go && go build -race -o main/mrcoordinator main/mrcoordinator.go && go build -race -o main/mrsequential main/mrsequential.go",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build Plugins Only",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "command": "rm -f mrapps/*.so && go build -race -buildmode=plugin -o mrapps/wc.so mrapps/wc.go && go build -race -buildmode=plugin -o mrapps/indexer.so mrapps/indexer.go && go build -race -buildmode=plugin -o mrapps/mtiming.so mrapps/mtiming.go && go build -race -buildmode=plugin -o mrapps/rtiming.so mrapps/rtiming.go && go build -race -buildmode=plugin -o mrapps/jobcount.so mrapps/jobcount.go && go build -race -buildmode=plugin -o mrapps/early_exit.so mrapps/early_exit.go && go build -race -buildmode=plugin -o mrapps/crash.so mrapps/crash.go && go build -race -buildmode=plugin -o mrapps/nocrash.so mrapps/nocrash.go",
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "label": "Build Binaries Only",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "command": "rm -f main/mrworker main/mrcoordinator && go build -race -o main/mrworker main/mrworker.go && go build -race -o main/mrcoordinator main/mrcoordinator.go",
+            "problemMatcher": [],
+            "group": "build"
+        }
+    ]
+}
